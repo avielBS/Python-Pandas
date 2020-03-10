@@ -19,9 +19,11 @@ class DataAnalyzer:
         8. get average rating of specific movie by title (@method get_rating_of)
         9. get users rated movies (NOT IMPLEMENTED)
         10. get average age of users rated a specific movie by title (HARD - NOT IMPLEMENTED)
-        11.
-        12.
-        13.
+        11. Get a graphical comparison (rating) between two movies by movie name
+        12. get movies list/table that are rated more than x-input value (may be sorted)
+        13. get the highest rated movie
+        14. get the lowest rated movie
+        15. get movies list/table that are rated between (min,max)-input values (may be sorted)
         ..
 
         The API should support the following graph plotting:
