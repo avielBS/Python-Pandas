@@ -1,1 +1,1 @@
-__all__ = ["utils", "DataAnalyzer"]
+__all__ = ['utils', 'data_analyzer', 'cli']

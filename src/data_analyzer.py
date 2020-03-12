@@ -1,6 +1,6 @@
 import click
 
-from src.utils import Utils
+from utils import Utils
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -43,34 +43,21 @@ class DataAnalyzer:
 
         pd.set_option('display.max_columns', None)
 
-    @click.group()
-    def analyzer(self):
-        """This is the cli for analyzing the data of the rated movies by the users"""
-
     @property
-    @analyzer.command()
     def ratings_movies(self):
-        """Get a joined table of ratings and movies"""
         # USERID = 0, MOVIEID = 1, RATING = 2, TITLE = 3, GENRES = 4
         return self._ratings.join(self._movies, on='MovieID').iloc[:, [0, 2, 3, 4]]
 
     @property
-    @analyzer.command()
     def ratings_users(self):
-        """Get a joined table of ratings and users"""
         # USERID = 0, MOVIEID = 1, RATING = 2, GENDER = 3, AGE = 4
         return self._ratings.join(self._users, on='UserID')
 
     @property
-    @analyzer.command()
     def ratings_movies_users(self):
-        """Get a joined table of ratings, movies and users"""
         return self._ratings.join(self._users, on='UserID').join(self._movies, on='MovieID')
 
-    @click.option('-u', '--userID', help='The user id of the user you want to get info for')
-    @analyzer.command()
     def get_info_for(self, userID):
-        """Get info about a user by its id"""
         return self.ratings_movies_users.groupby("UserID").get_group(userID)
 
     def get_raters_avg_age(self, title):

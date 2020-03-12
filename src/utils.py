@@ -1,4 +1,8 @@
 import pandas as pd
+import os
+from pathlib import Path
+
+relPath = str(Path(__file__).parent.parent) + "\\resources\\"
 
 
 class Utils:
@@ -13,16 +17,16 @@ class Utils:
 
     @staticmethod
     def get_movies():
-        return Utils.__read_csv__('../resources/movies.dat', names=['MovieID', 'Title', 'Genres'])
+        return Utils.__read_csv__(f'{relPath}\\movies.dat', names=['MovieID', 'Title', 'Genres'])
 
     @staticmethod
     def get_ratings():
-        return Utils.__read_csv__('../resources/ratings.dat',
+        return Utils.__read_csv__(f'{relPath}\\ratings.dat',
                                   names=['UserID', 'MovieID', 'Rating', 'Timestamp']).iloc[:, 0:3]
 
     @staticmethod
     def get_users():
-        return Utils.__read_csv__('../resources/users.dat',
+        return Utils.__read_csv__(f'{relPath}\\users.dat',
                                   names=['UserID', 'Gender', 'Age', 'Occupation', 'Zip-Code']).iloc[:, 0:3]
 
     @staticmethod
