@@ -29,9 +29,9 @@ def get_ratings_movies_users():
 
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
 @analyzer.command()
-def get_user_info(userID):
+def get_user_info(userid):
     """Get info about a user by its id"""
-    click.echo(data_analyzer.get_info_for(userID))
+    click.echo(data_analyzer.get_info_for(int(userid)))
 
 
 @click.option('-t', '--title', help='The title of the movie')
@@ -43,31 +43,31 @@ def get_average_age(title):
 
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
 @analyzer.command()
-def list_rated_movies(userID):
+def list_rated_movies(userid):
     """Lists the movies a particular user has rated"""
-    click.echo(data_analyzer.get_users_rated_movies(userID))
+    click.echo(data_analyzer.get_users_rated_movies(int(userid)))
 
 
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
 @analyzer.command()
-def get_user_rating_average(userID):
+def get_user_rating_average(userid):
     """Get the users average rating for all the movies he rated"""
-    click.echo(data_analyzer.get_user_rating_average(userID))
+    click.echo(data_analyzer.get_user_rating_average(int(userid)))
 
 
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
 @analyzer.command()
-def get_user_movie_count(userID):
+def get_user_movie_count(userid):
     """Get the users average rating for all the movies he rated"""
-    click.echo(data_analyzer.get_user_movies_count(userID))
+    click.echo(data_analyzer.get_user_movies_count(int(userid)))
 
 
 @click.option('-t', '--title', help='The title of the movie')
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
 @analyzer.command()
-def get_rating_of_user_for(userID, title):
+def get_rating_of_user_for(userid, title):
     """Get ratings of a particular user for a specific movie"""
-    click.echo(data_analyzer.get_user_ratings_for(userID, title))
+    click.echo(data_analyzer.get_user_ratings_for(int(userid), title))
 
 
 @click.option('-h', '--head', default=None, help='Number of items to retrieve')
@@ -77,7 +77,7 @@ def get_rating_of_user_for(userID, title):
 @analyzer.command()
 def get_average_ratings(head=None, sort=None, begin=None, end=None):
     """Get average ratings for the movies"""
-    click.echo(data_analyzer.get_average_ratings(head, sort, begin, end))
+    click.echo(data_analyzer.get_average_ratings(int(head), sort, int(begin), int(end)))
 
 
 @click.option('-t', '--title', help='The title of the movie')
