@@ -21,10 +21,10 @@ class DataAnalyzer:
         8. get average rating of specific movie by title (@method get_rating_of)
         9. get users rated movies (@method get_users_rated_movies)
         10. get average age of users rated a specific movie by title (@method get_raters_avg_age)
-        11. Get a graphical comparison (rating) between two movies by movie name
+        11. Get a graphical comparison (rating) between two movies by movie name (@method compare_graphical_two_movies_by_title)
         12. get movies list/table that are rated more than x-input value (@method get_average_ratings)
-        13. get the highest rated movie
-        14. get the lowest rated movie
+        13. get the highest rated movie (@method get_highest_rated_movie)
+        14. get the lowest rated movie (@method get_lowest_rated_movie)
         15. get movies list/table that are rated between (min,max)-input values (@method get_average_ratings)
         16. get users rating for specific movie (@method get_user_ratings_for)
         ..
@@ -88,6 +88,23 @@ class DataAnalyzer:
 
     def get_rating_of(self, name):
         return self.get_average_ratings()[name]
+
+    def get_highest_rated_movie(self):
+        average = self.ratings_movies.groupby('Title')['Rating'].mean()
+        return average[average >= 5]
+
+    def get_lowest_rated_movie(self):
+        average =  self.ratings_movies.groupby('Title')['Rating'].mean()
+        return average[average <= 1]
+
+    def compare_graphical_two_movies_by_title(self, title1, title2):
+        movie1_rating = float(self.get_rating_of(title1))
+        movie2_rating = float(self.get_rating_of(title2))
+
+        data = [[title1, movie1_rating],
+                [title2, movie2_rating]]
+        df = pd.DataFrame(data=data, columns=['Title', 'Rating'])
+        self.Plotter.plot(df, 'Title', 'Rating')
 
     class Plotter:
         @staticmethod

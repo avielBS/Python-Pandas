@@ -85,3 +85,25 @@ def get_average_ratings(head=None, sort=None, begin=None, end=None):
 def get_rating_of_movie(title):
     """Get average ratings for a specific movie"""
     click.echo(data_analyzer.get_rating_of(title))
+
+
+######## new commands #######
+
+@analyzer.command()
+def get_highest_rated_movie():
+    "get the highest rated movie"
+    click.echo(data_analyzer.get_highest_rated_movie())
+
+
+@analyzer.command()
+def get_lowest_rated_movie():
+    "get the lowest rated movie"
+    click.echo(data_analyzer.get_lowest_rated_movie())
+
+
+@analyzer.command()
+@click.option('-t1', '--title1', help='The title of the first movie')
+@click.option('-t2', '--title2', help='The title of the second movie')
+def compare_graphical_two_movies_by_title(title1, title2):
+    "graphical compare between two movies by thier ratings"
+    click.echo(data_analyzer.compare_graphical_two_movies_by_title(title1, title2))
