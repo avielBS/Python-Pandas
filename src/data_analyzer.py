@@ -28,13 +28,13 @@ class DataAnalyzer:
         return self._ratings.join(self._users, on='UserID').join(self._movies, on='MovieID')
 
     def get_info_for(self, userID):
-        return self.ratings_movies_users.groupby("UserID").get_group(userID)[["UserID", "MovieID", "Rating"]]
+        return self.ratings_movies_users.groupby("UserID").get_group(userID)[["UserID", "MovieID", "Title", "Rating"]]
 
     def get_raters_avg_age(self, title):
         return self.ratings_movies_users.groupby("Title").get_group(title)['Age'].mean()
 
-    def get_users_rated_movies(self, userID, graphical=False):
-        data = self.get_info_for(userID)[["Title", "Rating"]]
+    def get_users_rated_movies(self, userID, head, graphical=False):
+        data = self.get_info_for(userID)[["Title", "Rating"]].head(head)
         if not graphical:
             return data
         df = pd.DataFrame(data, columns=['Title', 'Rating'])
@@ -48,7 +48,7 @@ class DataAnalyzer:
 
     def get_user_ratings_for(self, userID, title):
         x = self.get_users_rated_movies(userID)
-        return x[x['Title'] == title]['Rating']
+        return x[x['Title'] == title]['Rating'].item()
 
     def get_average_ratings(self, head=None, sort=None, start=None, end=None, graphical=False):
         average = self.ratings_movies.groupby("Title")['Rating'].mean()
@@ -85,6 +85,7 @@ class DataAnalyzer:
     def compare_two_movies_by_title(self, title1, title2, graphical):
         movie1_rating = float(self.get_rating_of(title1))
         movie2_rating = float(self.get_rating_of(title2))
+        print(graphical)
         if not graphical:
             return f"{title1}\t{movie1_rating}\n" \
                    f"{title2}\t{movie2_rating}"

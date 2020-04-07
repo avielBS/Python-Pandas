@@ -42,11 +42,12 @@ def get_average_age(title):
 
 
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
+@click.option('-h', '--head', default=10, help='Number of items to retrieve')
 @click.option('-g', '--graphical', default='false', help='Show results in graph')
 @analyzer.command()
-def list_rated_movies(userid, graphical):
+def list_rated_movies(userid, graphical ,head):
     """Lists the movies a particular user has rated"""
-    click.echo(data_analyzer.get_users_rated_movies(int(userid), graphical))
+    click.echo(data_analyzer.get_users_rated_movies(int(userid), int(head), use_graphical(graphical)))
 
 
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
@@ -59,7 +60,7 @@ def get_user_rating_average(userid):
 @click.option('-u', '--userID', help='The user id of the user you want to get info for')
 @analyzer.command()
 def get_user_movie_count(userid):
-    """Get the users average rating for all the movies he rated"""
+    """Get the number of movies he rated"""
     click.echo(data_analyzer.get_user_movies_count(int(userid)))
 
 
@@ -73,13 +74,13 @@ def get_rating_of_user_for(userid, title):
 
 @click.option('-h', '--head', default=None, help='Number of items to retrieve')
 @click.option('-s', '--sort', default='descending', help='Sort type (ascending or descending)')
-@click.option('-b', '--begin', default=None, help='Minimum rating to fetch')
-@click.option('-e', '--end', default=None, help='Maximum rating to fetch')
+@click.option('-b', '--begin', default=1, help='Minimum rating to fetch')
+@click.option('-e', '--end', default=5, help='Maximum rating to fetch')
 @click.option('-g', '--graphical', default='false', help='Show results in graph')
 @analyzer.command()
 def get_average_ratings(head=None, sort=None, begin=None, end=None, graphical='false'):
     """Get average ratings for the movies"""
-    click.echo(data_analyzer.get_average_ratings(int(head), sort, float(begin), float(end), bool(graphical)))
+    click.echo(data_analyzer.get_average_ratings(int(head), sort, float(begin), float(end), use_graphical(graphical)))
 
 
 @click.option('-t', '--title', help='The title of the movie')
@@ -94,7 +95,7 @@ def get_rating_of_movie(title):
 @click.option('-g', '--graphical', default='false', help='Show results in graph')
 def get_highest_rated_movies(head, graphical):
     """get the highest rated movie"""
-    click.echo(data_analyzer.get_highest_rated_movies(int(head), bool(graphical)))
+    click.echo(data_analyzer.get_highest_rated_movies(int(head), use_graphical(graphical)))
 
 
 @analyzer.command()
@@ -102,7 +103,7 @@ def get_highest_rated_movies(head, graphical):
 @click.option('-g', '--graphical', default='false', help='Show results in graph')
 def get_lowest_rated_movies(head, graphical):
     """get the lowest rated movie"""
-    click.echo(data_analyzer.get_lowest_rated_movies(int(head), bool(graphical)))
+    click.echo(data_analyzer.get_lowest_rated_movies(int(head), use_graphical(graphical)))
 
 
 @analyzer.command()
@@ -111,4 +112,8 @@ def get_lowest_rated_movies(head, graphical):
 @click.option('-g', '--graphical', default='false', help='Show results in graph')
 def compare_two_movies_by_title(title1, title2, graphical):
     """compare between two movies by their ratings"""
-    click.echo(data_analyzer.compare_two_movies_by_title(title1, title2, bool(graphical)))
+    click.echo(data_analyzer.compare_two_movies_by_title(title1, title2, use_graphical(graphical)))
+
+
+def use_graphical(graphical):
+    return graphical.lower() in ['true', '1', 't', 'y', 'yes']
