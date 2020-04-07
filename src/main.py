@@ -1,3 +1,4 @@
 if __name__ == '__main__':
-    import cli
-    cli.analyzer()
+    import analyzer_gui
+
+    analyzer_gui.start()

@@ -1,5 +1,6 @@
 import click
 import sys
+from tkinter import *
 from data_analyzer import DataAnalyzer
 
 data_analyzer = DataAnalyzer()
@@ -146,3 +147,7 @@ def compare_two_movies_by_title(title1, title2, graphical, output_file):
 
 def use_graphical(graphical):
     return graphical.lower() in ['true', '1', 't', 'y', 'yes']
+
+
+if __name__ == "__main__":
+    analyzer()
