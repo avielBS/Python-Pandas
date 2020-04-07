@@ -32,105 +32,124 @@ class Application(Frame):
     def set_form(self, value):
         for widget in self.formFrame.winfo_children():
             widget.destroy()
-        parameters = {
+        options = {
             'Get info for user': {
-                'User ID': IntVar()
+                'cmd': lambda: print(data_analyzer.get_info_for(
+                    options['Get info for user']['params']['User ID'].get()
+                )),
+                'params': {
+                    'User ID': IntVar()
+                }
             },
             'Get average age of raters for movie': {
-                'Title': StringVar()
+                'cmd': lambda: print(data_analyzer.get_raters_avg_age(
+                    options['Get average age of raters for movie']['params']['Title'].get()
+                )),
+                'params': {
+                    'Title': StringVar()
+                }
             },
             'List rated movies': {
-                'User ID': IntVar(),
-                'Head': IntVar(),
-                'Graphic Results': BooleanVar()
+                'cmd': lambda: print(data_analyzer.get_users_rated_movies(
+                    options['List rated movies']['params']['User ID'].get(),
+                    options['List rated movies']['params']['Head'].get(),
+                    options['List rated movies']['params']['Graphic Results'].get()
+                )),
+                'params': {
+                    'User ID': IntVar(),
+                    'Head': IntVar(),
+                    'Graphic Results': BooleanVar()
+                }
             },
             'Get users\' rating average': {
-                'User ID': IntVar()
+                'cmd': lambda: print(data_analyzer.get_user_rating_average(
+                    options['Get users\' rating average']['params']['User ID'].get()
+                )),
+                'params': {
+                    'User ID': IntVar()
+                }
             },
             'Get user\'s movie count': {
-                'User ID': IntVar()
+                'cmd': lambda: print(data_analyzer.get_user_movies_count(
+                    options['Get user\'s movie count']['params']['User ID'].get()
+                )),
+                'params': {
+                    'User ID': IntVar()
+                }
             },
             'Get rating of user for movie': {
-                'User ID': IntVar(),
-                'Title': StringVar()
+                'cmd': lambda: print(data_analyzer.get_user_ratings_for(
+                    options['Get rating of user for movie']['params']['User ID'].get(),
+                    options['Get rating of user for movie']['params']['Title'].get()
+                )),
+                'params': {
+                    'User ID': IntVar(),
+                    'Title': StringVar()
+                }
             },
             'Get average ratings': {
-                'Head': IntVar(),
-                'Sort': StringVar(),
-                'Begin': DoubleVar(),
-                'End': DoubleVar(),
-                'Graphic Results': BooleanVar()
+                'cmd': lambda: print(data_analyzer.get_average_ratings(
+                    options['Get average ratings']['params']['Head'].get(),
+                    options['Get average ratings']['params']['Sort'].get(),
+                    options['Get average ratings']['params']['Begin'].get(),
+                    options['Get average ratings']['params']['End'].get(),
+                    options['Get average ratings']['params']['Graphic Results'].get()
+                )),
+                'params': {
+                    'Head': IntVar(),
+                    'Sort': StringVar(),
+                    'Begin': DoubleVar(),
+                    'End': DoubleVar(),
+                    'Graphic Results': BooleanVar()
+                }
             },
             'Get rating of movie': {
-                'Title': StringVar()
+                'cmd': lambda: print(data_analyzer.get_rating_of(
+                    options['Get rating of movie']['params']['Title'].get()
+                )),
+                'params': {
+                    'Title': StringVar()
+                }
             },
             'Get highest rated movies': {
-                'Head': IntVar(),
-                'Graphic Results': BooleanVar()
+                'cmd': lambda: print(data_analyzer.get_highest_rated_movies(
+                    options['Get highest rated movies']['params']['Head'].get(),
+                    options['Get highest rated movies']['params']['Graphic Results'].get()
+                )),
+                'params': {
+                    'Head': IntVar(),
+                    'Graphic Results': BooleanVar()
+                }
             },
             'Get lowest rated movies': {
-                'Head': IntVar(),
-                'Graphic Results': BooleanVar()
+                'cmd': lambda: print(data_analyzer.get_lowest_rated_movies(
+                    options['Get lowest rated movies']['params']['Head'].get(),
+                    options['Get lowest rated movies']['params']['Graphic Results'].get()
+                )),
+                'params': {
+                    'Head': IntVar(),
+                    'Graphic Results': BooleanVar()
+                }
             },
             'Compare two movies by titles': {
-                'Title One': StringVar(),
-                'Title Two': StringVar(),
-                'Graphic Results': BooleanVar()
+                'cmd': lambda: print(data_analyzer.compare_two_movies_by_title(
+                    options['Compare two movies by titles']['params']['Title One'].get(),
+                    options['Compare two movies by titles']['params']['Title Two'].get(),
+                    options['Compare two movies by titles']['params']['Graphic Results'].get()
+                )),
+                'params': {
+                    'Title One': StringVar(),
+                    'Title Two': StringVar(),
+                    'Graphic Results': BooleanVar()
+                }
             }
         }
-        commands = {
-            'Get info for user': lambda: print(data_analyzer.get_info_for(
-                parameters['Get info for user']['User ID'].get()
-            )),
-            'Get average age of raters for movie': lambda: print(data_analyzer.get_raters_avg_age(
-                parameters['Get average age of raters for movie']['Title'].get()
-            )),
-            'List rated movies': lambda: print(data_analyzer.get_users_rated_movies(
-                parameters['List rated movies']['User ID'].get(),
-                parameters['List rated movies']['Head'].get(),
-                parameters['List rated movies']['Graphic Results'].get()
-            )),
-            'Get users\' rating average': lambda: print(data_analyzer.get_user_rating_average(
-                parameters['Get users\' rating average']['User ID'].get()
-            )),
-            'Get user\'s movie count': lambda: print(data_analyzer.get_user_movies_count(
-                parameters['Get user\'s movie count']['User ID'].get()
-            )),
-            'Get rating of user for movie': lambda: print(data_analyzer.get_user_ratings_for(
-                parameters['Get rating of user for movie']['User ID'].get(),
-                parameters['Get rating of user for movie']['Title'].get()
-            )),
-            'Get average ratings': lambda: print(data_analyzer.get_average_ratings(
-                parameters['Get average ratings']['Head'].get(),
-                parameters['Get average ratings']['Sort'].get(),
-                parameters['Get average ratings']['Begin'].get(),
-                parameters['Get average ratings']['End'].get(),
-                parameters['Get average ratings']['Graphic Results'].get()
-            )),
-            'Get rating of movie': lambda: print(data_analyzer.get_rating_of(
-                parameters['Get rating of movie']['Title'].get()
-            )),
-            'Get highest rated movies': lambda: print(data_analyzer.get_highest_rated_movies(
-                parameters['Get highest rated movies']['Head'].get(),
-                parameters['Get highest rated movies']['Graphic Results'].get()
-            )),
-            'Get lowest rated movies': lambda: print(data_analyzer.get_lowest_rated_movies(
-                parameters['Get lowest rated movies']['Head'].get(),
-                parameters['Get lowest rated movies']['Graphic Results'].get()
-            )),
-            'Compare two movies by titles': lambda: print(data_analyzer.compare_two_movies_by_title(
-                parameters['Compare two movies by titles']['Title One'].get(),
-                parameters['Compare two movies by titles']['Title Two'].get(),
-                parameters['Compare two movies by titles']['Graphic Results'].get()
-            ))
-        }
-        command = commands.get(value)
-        params = parameters.get(value)
-        for index, param in enumerate(params):
+        option = options.get(value)
+        for index, param in enumerate(option['params']):
             Label(self.formFrame, text=param).grid(row=0, column=index * 2)
-            Entry(self.formFrame, textvariable=params[param]).grid(row=0, column=index * 2 + 1)
-        Button(self.formFrame, text='Analyze', command=lambda: Application.execute_command(command)) \
-            .grid(row=1, column=int(round(len(params.keys()) / 2)) + 1)
+            Entry(self.formFrame, textvariable=option['params'][param]).grid(row=0, column=index * 2 + 1)
+        Button(self.formFrame, text='Analyze', command=lambda: Application.execute_command(option['cmd'])) \
+            .grid(row=1, column=int(round(len(option['params'].keys()) / 2)) + 1)
 
     @staticmethod
     def execute_command(command):
@@ -150,12 +169,6 @@ class Application(Frame):
         self.set_form(value)
 
 
-root = Tk()
-app = Application(master=root)
-textFrame = Text(root)
-textFrame.pack()
-
-
 class PrintToText(object):
     def flush(self):
         pass
@@ -164,8 +177,15 @@ class PrintToText(object):
         textFrame.insert(END, s)
 
 
+root = Tk()
+app = Application(master=root)
+textFrame = Text(root)
+textFrame.pack()
 sys.stdout = PrintToText()
 
 
 def start():
     app.mainloop()
+
+
+start()
