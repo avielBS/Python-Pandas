@@ -45,7 +45,7 @@ def get_average_age(title):
 @click.option('-h', '--head', default=10, help='Number of items to retrieve')
 @click.option('-g', '--graphical', default='false', help='Show results in graph')
 @analyzer.command()
-def list_rated_movies(userid, graphical ,head):
+def list_rated_movies(userid, graphical, head):
     """Lists the movies a particular user has rated"""
     click.echo(data_analyzer.get_users_rated_movies(int(userid), int(head), use_graphical(graphical)))
 

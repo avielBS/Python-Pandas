@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 from pathlib import Path
 
 relPath = str(Path(__file__).parent.parent) + "\\resources\\"
