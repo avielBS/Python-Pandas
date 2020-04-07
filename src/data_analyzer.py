@@ -1,7 +1,8 @@
 from utils import Utils
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
+
+pd.set_option('display.max_rows', None)
 
 
 class DataAnalyzer:
@@ -200,6 +201,7 @@ class DataAnalyzer:
         """
         Internal class for plotting data with matplotlib.pyplot
         """
+
         @staticmethod
         def plot(data, x, y):
             data.plot.bar(x=x, y=y, rot=0)
