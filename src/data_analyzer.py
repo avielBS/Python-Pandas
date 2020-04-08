@@ -9,14 +9,24 @@ class DataAnalyzer:
     """
     DataAnalyzer class for analyzing data of movie ratings by users
     """
+    __instance = None
+
+    @staticmethod
+    def get_instance():
+        if DataAnalyzer.__instance is None:
+            DataAnalyzer()
+        return DataAnalyzer.__instance
 
     def __init__(self):
         data_dict = Utils.get_data_dict()
         self._movies = data_dict["movies"].set_index('MovieID')
         self._users = data_dict["users"].set_index('UserID')
         self._ratings = data_dict["ratings"]
-
         pd.set_option('display.max_columns', None)
+        if DataAnalyzer.__instance is not None:
+            raise Exception("This class is a singleton!")
+        else:
+            DataAnalyzer.__instance = self
 
     @property
     def ratings_movies(self):
