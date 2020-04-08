@@ -56,6 +56,3 @@ sys.stdout = PrintToText()
 
 def start():
     app.mainloop()
-
-
-start()
