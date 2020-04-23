@@ -32,7 +32,7 @@ class FormFactory:
 
     @staticmethod
     def get_form(value):
-        return FormFactory.options[value]()
+        return FormFactory.options[value].get_instance()
 
     @staticmethod
     def place_labels_and_entries(labels, formFrame):

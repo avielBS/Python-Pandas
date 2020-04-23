@@ -28,8 +28,5 @@ class GetLowestRatedMoviesForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_lowest_rated_movies(
-            self.labels['Head'].get(),
-            self.labels['Graphic Results'].get()
-        ))
+    def execute(self):
+        print(data_analyzer.get_lowest_rated_movies(self.labels['Head'].get(), self.labels['Graphic Results'].get()))

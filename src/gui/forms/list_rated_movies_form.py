@@ -29,9 +29,5 @@ class ListRatedMoviesForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_users_rated_movies(
-            self.labels['User ID'].get(),
-            self.labels['Head'].get(),
-            self.labels['Graphic Results'].get()
-        ))
+    def execute(self):
+        print(data_analyzer.get_users_rated_movies(self.labels['User ID'].get(), self.labels['Head'].get(), self.labels['Graphic Results'].get()))

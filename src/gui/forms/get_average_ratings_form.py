@@ -31,8 +31,8 @@ class GetAverageRatingsForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_average_ratings(
+    def execute(self):
+        print(data_analyzer.get_average_ratings(
             self.labels['Head'].get(),
             self.labels['Sort'].get(),
             self.labels['Begin'].get(),

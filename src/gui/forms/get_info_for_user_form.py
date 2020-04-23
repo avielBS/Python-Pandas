@@ -27,5 +27,5 @@ class GetInfoForUserForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_info_for(self.labels['User ID'].get()))
+    def execute(self):
+        print(data_analyzer.get_info_for(self.labels['User ID'].get()))

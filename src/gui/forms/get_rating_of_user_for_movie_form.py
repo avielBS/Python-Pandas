@@ -28,8 +28,5 @@ class GetRatingOfUserForMovieForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_user_ratings_for(
-            self.labels['User ID'].get(),
-            self.labels['Title'].get()
-        ))
+    def execute(self):
+        print(data_analyzer.get_user_ratings_for(self.labels['User ID'].get(), self.labels['Title'].get()))

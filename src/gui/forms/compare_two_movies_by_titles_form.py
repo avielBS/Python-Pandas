@@ -29,9 +29,5 @@ class CompareTwoMoviesByTitlesForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_highest_rated_movies(
-            self.labels['Title One'].get(),
-            self.labels['Title Two'].get(),
-            self.labels['Graphic Results'].get()
-        ))
+    def execute(self):
+        print(data_analyzer.get_highest_rated_movies(self.labels['Title One'].get(), self.labels['Title Two'].get(), self.labels['Graphic Results'].get()))

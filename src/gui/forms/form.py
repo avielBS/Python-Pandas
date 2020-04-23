@@ -5,7 +5,7 @@ class Form:
         """
         pass
 
-    def get_command(self):
+    def execute(self):
         """
         Returns the command of this form
         """

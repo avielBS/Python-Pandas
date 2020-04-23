@@ -27,5 +27,5 @@ class GetUsersRatingAverageForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_user_rating_average(self.labels['User ID'].get()))
+    def execute(self):
+        print(data_analyzer.get_user_rating_average(self.labels['User ID'].get()))

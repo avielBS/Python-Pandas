@@ -27,5 +27,5 @@ class GetUsersMovieCountForm(Form):
     def labels(self):
         return self._labels
 
-    def get_command(self):
-        return lambda: print(data_analyzer.get_user_movies_count(self.labels['User ID'].get()))
+    def execute(self):
+        print(data_analyzer.get_user_movies_count(self.labels['User ID'].get()))
