@@ -5,6 +5,12 @@ class Form:
         """
         pass
 
+    def dropdowns(self):
+        """
+        Returns this form dropdowns
+        """
+        pass
+
     def execute(self):
         """
         Returns the command of this form

@@ -27,5 +27,9 @@ class GetInfoForUserForm(Form):
     def labels(self):
         return self._labels
 
+    @property
+    def dropdowns(self):
+        return None
+
     def execute(self):
         print(data_analyzer.get_info_for(self.labels['User ID'].get()))

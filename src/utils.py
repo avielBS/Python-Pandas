@@ -15,6 +15,12 @@ class Utils:
         }
 
     @staticmethod
+    def get_movie_list():
+        lst = list(Utils.get_movies()['Title'])
+        lst.sort()
+        return lst
+
+    @staticmethod
     def get_movies():
         return Utils.__read_csv__(f'{relPath}\\movies.dat', names=['MovieID', 'Title', 'Genres'])
 

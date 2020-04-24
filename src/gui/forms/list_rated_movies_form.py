@@ -29,5 +29,9 @@ class ListRatedMoviesForm(Form):
     def labels(self):
         return self._labels
 
+    @property
+    def dropdowns(self):
+        return None
+
     def execute(self):
         print(data_analyzer.get_users_rated_movies(self.labels['User ID'].get(), self.labels['Head'].get(), self.labels['Graphic Results'].get()))

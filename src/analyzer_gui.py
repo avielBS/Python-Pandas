@@ -42,7 +42,7 @@ class Application(Frame):
         for widget in self.formFrame.winfo_children():
             widget.destroy()
         form = FormFactory.get_form(value)
-        FormFactory.place_labels_and_entries(form.labels, self.formFrame)
+        FormFactory.place_labels_and_entries(form, self.formFrame)
         Button(self.formFrame, text='Analyze', command=lambda: (self.textFrame.delete(1.0, END), form.execute())).grid(row=1, column=1)
 
 

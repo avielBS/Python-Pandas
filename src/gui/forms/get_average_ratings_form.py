@@ -31,6 +31,10 @@ class GetAverageRatingsForm(Form):
     def labels(self):
         return self._labels
 
+    @property
+    def dropdowns(self):
+        return None
+
     def execute(self):
         print(data_analyzer.get_average_ratings(
             self.labels['Head'].get(),

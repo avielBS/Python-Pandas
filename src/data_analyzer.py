@@ -72,7 +72,7 @@ class DataAnalyzer:
         """
         return self.ratings_movies_users.groupby("Title").get_group(title)['Age'].mean()
 
-    def get_users_rated_movies(self, userID, head, graphical=False):
+    def get_users_rated_movies(self, userID, head=None, graphical=False):
         """
         Gets all the movies a user as rated
         Args:
@@ -82,7 +82,9 @@ class DataAnalyzer:
         Returns:
             :returns Table that includes Title and Rating columns, if graphical was not specified
         """
-        data = self.get_info_for(userID)[["Title", "Rating"]].head(head)
+        data = self.get_info_for(userID)[["Title", "Rating"]]
+        if head is not None:
+            data = data.head(head)
         if not graphical:
             return data
         df = pd.DataFrame(data, columns=['Title', 'Rating'])
@@ -117,7 +119,7 @@ class DataAnalyzer:
         Returns:
             :returns (double) - the rating of the user to the movie
         """
-        x = self.get_users_rated_movies(userID, 1)
+        x = self.get_users_rated_movies(userID)
         return x[x['Title'] == title]['Rating'].item()
 
     def get_average_ratings(self, head=None, sort=None, start=None, end=None, graphical=False):
@@ -142,7 +144,6 @@ class DataAnalyzer:
         ret = average.head(head) if head is not None else average
         if not graphical:
             return ret
-        print(ret)
         df = pd.DataFrame(data=[[title, average.get(title)] for title in ret.keys()], columns=['Title', 'Rating'])
         DataAnalyzer.Plotter.plot(df, 'Title', 'Rating')
 
@@ -198,7 +199,6 @@ class DataAnalyzer:
         """
         movie1_rating = float(self.get_rating_of(title1))
         movie2_rating = float(self.get_rating_of(title2))
-        print(graphical)
         if not graphical:
             return f"{title1}\t{movie1_rating}\n" \
                    f"{title2}\t{movie2_rating}"

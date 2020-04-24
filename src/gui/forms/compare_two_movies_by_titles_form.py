@@ -20,6 +20,11 @@ class CompareTwoMoviesByTitlesForm(Form):
             'Title Two': StringVar(),
             'Graphic Results': BooleanVar()
         }
+
+        self._dropdowns = {
+            'Title One',
+            'Title Two'
+        }
         if CompareTwoMoviesByTitlesForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -29,5 +34,9 @@ class CompareTwoMoviesByTitlesForm(Form):
     def labels(self):
         return self._labels
 
+    @property
+    def dropdowns(self):
+        return self._dropdowns
+
     def execute(self):
-        print(data_analyzer.get_highest_rated_movies(self.labels['Title One'].get(), self.labels['Title Two'].get(), self.labels['Graphic Results'].get()))
+        print(data_analyzer.compare_two_movies_by_title(self.labels['Title One'].get(), self.labels['Title Two'].get(), self.labels['Graphic Results'].get()))

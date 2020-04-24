@@ -28,5 +28,9 @@ class GetHighestRatedMoviesForm(Form):
     def labels(self):
         return self._labels
 
+    @property
+    def dropdowns(self):
+        return None
+
     def execute(self):
         print(data_analyzer.get_highest_rated_movies(self.labels['Head'].get(), self.labels['Graphic Results'].get()))
