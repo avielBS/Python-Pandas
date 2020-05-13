@@ -60,7 +60,10 @@ class DataAnalyzer:
         Returns:
             :returns A table contains UserID, MovieID, Title and Rating, where UserID = :param userID
         """
-        return self.ratings_movies_users.groupby("UserID").get_group(userID)[["UserID", "MovieID", "Title", "Rating"]]
+        try:
+            return self.ratings_movies_users.groupby("UserID").get_group(userID)[["UserID", "MovieID", "Title", "Rating"]]
+        except (KeyError, ValueError):
+            return "This user id not in users list"
 
     def get_raters_avg_age(self, title):
         """
@@ -82,13 +85,16 @@ class DataAnalyzer:
         Returns:
             :returns Table that includes Title and Rating columns, if graphical was not specified
         """
-        data = self.get_info_for(userID)[["Title", "Rating"]]
-        if head is not None:
-            data = data.head(head)
-        if not graphical:
-            return data
-        df = pd.DataFrame(data, columns=['Title', 'Rating'])
-        DataAnalyzer.Plotter.plot(df, 'Title', 'Rating')
+        try:
+            data = self.get_info_for(userID)[["Title", "Rating"]]
+            if head is not None:
+                data = data.head(head)
+            if not graphical:
+                return data
+            df = pd.DataFrame(data, columns=['Title', 'Rating'])
+            DataAnalyzer.Plotter.plot(df, 'Title', 'Rating')
+        except (KeyError, ValueError, TypeError):
+            return "This user not in users list"
 
     def get_user_movies_count(self, userID):
         """
@@ -98,7 +104,10 @@ class DataAnalyzer:
         Returns:
             :returns (int) - the count of movies the user has rated
         """
-        return self.get_info_for(userID).count()[0]
+        try:
+            return self.get_info_for(userID).count()[0]
+        except (KeyError, ValueError, TypeError):
+            return "This user id not in users list"
 
     def get_user_rating_average(self, userID):
         """
@@ -108,7 +117,11 @@ class DataAnalyzer:
         Returns:
             :returns (double) - the average of ratings the user has given
         """
-        return self.get_info_for(userID)["Rating"].mean()
+        try:
+            return self.get_info_for(userID)["Rating"].mean()
+        except (KeyError, ValueError, TypeError):
+            return "This user id not in users list"
+
 
     def get_user_ratings_for(self, userID, title):
         """
@@ -120,7 +133,10 @@ class DataAnalyzer:
             :returns (double) - the rating of the user to the movie
         """
         x = self.get_users_rated_movies(userID)
-        return x[x['Title'] == title]['Rating'].item()
+        try:
+            return x[x['Title'] == title]['Rating'].item()
+        except (KeyError, ValueError, TypeError):
+            return "The user not rated this movie"
 
     def get_average_ratings(self, head=None, sort=None, start=None, end=None, graphical=False):
         """
@@ -206,6 +222,27 @@ class DataAnalyzer:
                 [title2, movie2_rating]]
         df = pd.DataFrame(data=data, columns=['Title', 'Rating'])
         DataAnalyzer.Plotter.plot(df, 'Title', 'Rating')
+
+    def compare_two_movies_by_title_and_users_count(self, title1, title2, graphical):
+        """
+        Compares the data of the movies by viewers
+        Args:
+            :param title1 (string) - title of movies 1
+            :param title2 (string) - title of movie 2
+            :param graphical (boolean) - whether to show the results graphically
+        Returns:
+            :returns (string) - the comparison between the two movies, if graphical was not specified
+        """
+        movie1_count = float(self.ratings_movies_users.groupby("Title").get_group(title1).count()[0])
+        movie2_count = float(self.ratings_movies_users.groupby("Title").get_group(title2).count()[0])
+
+        if not graphical:
+            return f"{title1}\t{movie1_count}\n" \
+                   f"{title2}\t{movie2_count}"
+        data = [[title1, movie1_count],
+                [title2, movie2_count]]
+        df = pd.DataFrame(data=data, columns=['Title', 'Count'])
+        DataAnalyzer.Plotter.plot(df, 'Title', 'Count')
 
     class Plotter:
         """

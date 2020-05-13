@@ -1,3 +1,4 @@
+from src.gui.forms.compare_two_movies_by_titles_and_users_count import *
 from .forms.get_info_for_user_form import *
 from .forms.get_average_age_of_raters_for_movie_form import *
 from .forms.list_rated_movies_form import *
@@ -24,7 +25,8 @@ class FormFactory:
         'Get rating of movie': GetRatingOfMovieForm,
         'Get highest rated movies': GetHighestRatedMoviesForm,
         'Get lowest rated movies': GetLowestRatedMoviesForm,
-        'Compare two movies by titles': CompareTwoMoviesByTitlesForm
+        'Compare two movies by titles': CompareTwoMoviesByTitlesForm,
+        'Compare two movies by titles - users counts': CompareTwoMoviesByTitlesAndUsersCountForm,
     }
 
     @staticmethod
