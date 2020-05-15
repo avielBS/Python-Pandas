@@ -16,7 +16,8 @@ class Form:
         Returns the command of this form
         """
         pass
-    def get_data(self):
+
+    def data(self):
         """
         Returns the command of this form
         """

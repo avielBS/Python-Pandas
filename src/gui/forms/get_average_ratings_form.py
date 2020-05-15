@@ -22,6 +22,9 @@ class GetAverageRatingsForm(Form):
             'End': DoubleVar(),
             'Graphic Results': BooleanVar()
         }
+
+        self._data = None
+
         if GetAverageRatingsForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -46,5 +49,5 @@ class GetAverageRatingsForm(Form):
         print(self._data)
 
     @property
-    def get_data(self):
+    def data(self):
         return self._data

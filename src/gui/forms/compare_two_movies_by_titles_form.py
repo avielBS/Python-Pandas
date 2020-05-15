@@ -25,6 +25,9 @@ class CompareTwoMoviesByTitlesForm(Form):
             'Title One',
             'Title Two'
         }
+
+        self._data = None
+
         if CompareTwoMoviesByTitlesForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -39,9 +42,11 @@ class CompareTwoMoviesByTitlesForm(Form):
         return self._dropdowns
 
     def execute(self):
-        self._data = data_analyzer.compare_two_movies_by_title(self.labels['Title One'].get(), self.labels['Title Two'].get(), self.labels['Graphic Results'].get())
+        self._data = data_analyzer.compare_two_movies_by_title(self.labels['Title One'].get(),
+                                                               self.labels['Title Two'].get(),
+                                                               self.labels['Graphic Results'].get())
         print(self._data)
 
     @property
-    def get_data(self):
+    def data(self):
         return self._data

@@ -19,6 +19,9 @@ class GetHighestRatedMoviesForm(Form):
             'Head': IntVar(),
             'Graphic Results': BooleanVar()
         }
+
+        self._data = None
+
         if GetHighestRatedMoviesForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -37,5 +40,5 @@ class GetHighestRatedMoviesForm(Form):
         print(self._data)
 
     @property
-    def get_data(self):
+    def data(self):
         return self._data

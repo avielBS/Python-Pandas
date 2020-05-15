@@ -25,6 +25,9 @@ class CompareTwoMoviesByTitlesAndUsersCountForm(Form):
             'Title One',
             'Title Two'
         }
+
+        self._data = None
+
         if CompareTwoMoviesByTitlesAndUsersCountForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -40,10 +43,10 @@ class CompareTwoMoviesByTitlesAndUsersCountForm(Form):
 
     def execute(self):
         self._data = data_analyzer.compare_two_movies_by_title_and_users_count(self.labels['Title One'].get(),
-                                                                  self.labels['Title Two'].get(),
-                                                                  self.labels['Graphic Results'].get())
+                                                                               self.labels['Title Two'].get(),
+                                                                               self.labels['Graphic Results'].get())
         print(self._data)
 
     @property
-    def get_data(self):
+    def data(self):
         return self._data

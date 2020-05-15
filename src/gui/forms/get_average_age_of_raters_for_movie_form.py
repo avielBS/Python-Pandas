@@ -21,6 +21,9 @@ class GetAverageAgeOfRatersForMovieForm(Form):
         self._dropdowns = {
             'Title'
         }
+
+        self._data = None
+
         if GetAverageAgeOfRatersForMovieForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -39,5 +42,5 @@ class GetAverageAgeOfRatersForMovieForm(Form):
         print(self._data)
 
     @property
-    def get_data(self):
+    def data(self):
         return self._data

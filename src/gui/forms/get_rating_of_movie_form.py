@@ -21,6 +21,9 @@ class GetRatingOfMovieForm(Form):
         self._dropdowns = {
             'Title'
         }
+
+        self._data = None
+
         if GetRatingOfMovieForm.__instance is not None:
             raise Exception("This class is a singleton!")
         else:
@@ -39,5 +42,5 @@ class GetRatingOfMovieForm(Form):
         print(self._data)
 
     @property
-    def get_data(self):
+    def data(self):
         return self._data
