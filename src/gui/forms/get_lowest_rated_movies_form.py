@@ -33,4 +33,9 @@ class GetLowestRatedMoviesForm(Form):
         return None
 
     def execute(self):
-        print(data_analyzer.get_lowest_rated_movies(self.labels['Head'].get(), self.labels['Graphic Results'].get()))
+        self._data = data_analyzer.get_lowest_rated_movies(self.labels['Head'].get(), self.labels['Graphic Results'].get())
+        print(self._data)
+
+    @property
+    def get_data(self):
+        return self._data

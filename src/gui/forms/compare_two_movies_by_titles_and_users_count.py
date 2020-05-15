@@ -39,4 +39,11 @@ class CompareTwoMoviesByTitlesAndUsersCountForm(Form):
         return self._dropdowns
 
     def execute(self):
-        print(data_analyzer.compare_two_movies_by_title_and_users_count(self.labels['Title One'].get(), self.labels['Title Two'].get(), self.labels['Graphic Results'].get()))
+        self._data = data_analyzer.compare_two_movies_by_title_and_users_count(self.labels['Title One'].get(),
+                                                                  self.labels['Title Two'].get(),
+                                                                  self.labels['Graphic Results'].get())
+        print(self._data)
+
+    @property
+    def get_data(self):
+        return self._data

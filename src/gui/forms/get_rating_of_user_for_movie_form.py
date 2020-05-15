@@ -36,4 +36,9 @@ class GetRatingOfUserForMovieForm(Form):
         return self._dropdowns
 
     def execute(self):
-        print(data_analyzer.get_user_ratings_for(self.labels['User ID'].get(), self.labels['Title'].get()))
+        self._data = data_analyzer.get_user_ratings_for(self.labels['User ID'].get(), self.labels['Title'].get())
+        print(self._data)
+
+    @property
+    def get_data(self):
+        return self._data

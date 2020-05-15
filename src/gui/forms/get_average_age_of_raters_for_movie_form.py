@@ -35,4 +35,9 @@ class GetAverageAgeOfRatersForMovieForm(Form):
         return self._dropdowns
 
     def execute(self):
-        print(data_analyzer.get_raters_avg_age(self.labels['Title'].get()))
+        self._data = data_analyzer.get_raters_avg_age(self.labels['Title'].get())
+        print(self._data)
+
+    @property
+    def get_data(self):
+        return self._data

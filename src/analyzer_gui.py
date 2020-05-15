@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import filedialog
+
 from gui.form_factory import FormFactory
 
 
@@ -44,6 +46,17 @@ class Application(Frame):
         form = FormFactory.get_form(value)
         FormFactory.place_labels_and_entries(form, self.formFrame)
         Button(self.formFrame, text='Analyze', command=lambda: (self.textFrame.delete(1.0, END), form.execute())).grid(row=1, column=1)
+        Button(self.formFrame, text='Save', command=lambda: (self.textFrame.delete(1.0, END), self.save_file(form))).grid(row=1, column=2)
+
+    def save_file(self,form):
+        data = form.get_data;
+        f = filedialog.asksaveasfile(mode='w', defaultextension=".csv")
+        try:
+            data.to_csv(f)
+        except AttributeError:
+            f.write(str(data))
+            f.close()
+
 
 
 def start():

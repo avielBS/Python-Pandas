@@ -36,4 +36,9 @@ class GetMovieRatedUsersCountForm(Form):
         return self._dropdowns
 
     def execute(self):
-        print(data_analyzer.get_movie_rated_users_count(self.labels['Title'].get()))
+        self._data = data_analyzer.get_movie_rated_users_count(self.labels['Title'].get())
+        print(self._data)
+
+    @property
+    def get_data(self):
+        return self._data
