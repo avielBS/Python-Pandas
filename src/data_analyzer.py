@@ -61,7 +61,8 @@ class DataAnalyzer:
             :returns A table contains UserID, MovieID, Title and Rating, where UserID = :param userID
         """
         try:
-            return self.ratings_movies_users.groupby("UserID").get_group(userID)[["UserID", "MovieID", "Title", "Rating"]]
+            return self.ratings_movies_users.groupby("UserID").get_group(userID)[
+                ["UserID", "MovieID", "Title", "Rating"]]
         except (KeyError, ValueError):
             return "This user id not in users list"
 
@@ -121,7 +122,6 @@ class DataAnalyzer:
             return self.get_info_for(userID)["Rating"].mean()
         except (KeyError, ValueError, TypeError):
             return "This user id not in users list"
-
 
     def get_user_ratings_for(self, userID, title):
         """
@@ -223,6 +223,20 @@ class DataAnalyzer:
         df = pd.DataFrame(data=data, columns=['Title', 'Rating'])
         DataAnalyzer.Plotter.plot(df, 'Title', 'Rating')
 
+    def get_movie_rated_users_count(self, title):
+        """
+        Returns the users count that rated a specific movie by its title
+        Args:
+            :param title (string) - the title of the movie
+        Returns:
+            :return: the user count
+        """
+
+        try:
+            return float(self.ratings_movies_users.groupby("Title").get_group(title).count()[0])
+        except Exception as e:
+            return 0
+
     def compare_two_movies_by_title_and_users_count(self, title1, title2, graphical):
         """
         Compares the data of the movies by viewers
@@ -233,8 +247,8 @@ class DataAnalyzer:
         Returns:
             :returns (string) - the comparison between the two movies, if graphical was not specified
         """
-        movie1_count = float(self.ratings_movies_users.groupby("Title").get_group(title1).count()[0])
-        movie2_count = float(self.ratings_movies_users.groupby("Title").get_group(title2).count()[0])
+        movie1_count = self.get_movie_rated_users_count(title1)
+        movie2_count = self.get_movie_rated_users_count(title2)
 
         if not graphical:
             return f"{title1}\t{movie1_count}\n" \

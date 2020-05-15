@@ -10,6 +10,7 @@ from .forms.get_rating_of_movie_form import *
 from .forms.get_highest_rated_movies_form import *
 from .forms.get_lowest_rated_movies_form import *
 from .forms.compare_two_movies_by_titles_form import *
+from .forms.get_movie_rated_users_count_form import *
 from utils import Utils
 
 
@@ -27,6 +28,7 @@ class FormFactory:
         'Get lowest rated movies': GetLowestRatedMoviesForm,
         'Compare two movies by titles': CompareTwoMoviesByTitlesForm,
         'Compare two movies by titles - users counts': CompareTwoMoviesByTitlesAndUsersCountForm,
+        'Get movie\'s rated user count': GetMovieRatedUsersCountForm
     }
 
     @staticmethod
@@ -42,6 +44,7 @@ class FormFactory:
         for index, label in enumerate(form.labels):
             Label(formFrame, text=label).grid(row=0, column=index * 2)
             if form.dropdowns is not None and label in form.dropdowns:
-                OptionMenu(formFrame, form.labels[label], *Utils.get_movie_list(), command=form.labels[label].set).grid(row=0, column=index * 2 + 1)
+                OptionMenu(formFrame, form.labels[label], *Utils.get_movie_list(), command=form.labels[label].set).grid(
+                    row=0, column=index * 2 + 1)
             else:
                 Entry(formFrame, textvariable=form.labels[label]).grid(row=0, column=index * 2 + 1)

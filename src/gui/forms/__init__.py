@@ -10,5 +10,7 @@ __all__ = [
     'get_rating_of_movie_form',
     'get_highest_rated_movies_form',
     'get_lowest_rated_movies_form',
-    'compare_two_movies_by_titles_form'
+    'compare_two_movies_by_titles_form',
+    'compare_two_movies_by_titles_and_users_count',
+    'get_movie_rated_users_count_form'
 ]
